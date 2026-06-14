@@ -1,33 +1,73 @@
-package com.example.demo.entity;
+package com.example.demo.controller;
 
-// TODO: Import JPA annotations
+import java.util.List;
+import java.util.Optional;
 
-// Hint:
-// You need:
-// @Entity, @Id, @GeneratedValue
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-public class Employee {
+import com.example.demo.entity.Employee;
+import com.example.demo.repository.EmployeeRepository;
 
-    // TODO: Add fields
+@RestController
+@RequestMapping("/employee")
+public class EmployeeController {
 
-    // Hint:
-    // id → Long (primary key, auto-generated)
-    // name → String
-    // designation → String
-    // salary → Double
+    @Autowired
+    private EmployeeRepository repo;
 
-    // ----------------------------
+   
+    @PostMapping("/save")
+    public Employee saveEmployee(@RequestBody Employee employee) {
 
-    // TODO: Add constructors
+        return repo.save(employee);
+    }
 
-    // Hint:
-    // 1. Default constructor (important for JPA)
-    // 2. Parameterized constructor (all fields except id optional)
+    @GetMapping("/all")
+    public List<Employee> getAllEmployees() {
 
-    // ----------------------------
+        return repo.findAll();
+    }
 
-    // TODO: Add getters and setters
+    
+    @GetMapping("/{id}")
+    public Employee getEmployeeById(@PathVariable long id) {
 
-    // Hint:
-    // Right click → Source → Generate Getters and Setters
+        Optional<Employee> emp = repo.findById(id);
+
+        if (emp.isPresent()) {
+            return emp.get();
+        }
+
+        return null;
+    }
+
+    
+    @PutMapping("/update/{id}")
+    public Employee updateEmployee(@PathVariable long id,
+                                   @RequestBody Employee employee) {
+
+        Optional<Employee> emp = repo.findById(id);
+
+        if (emp.isPresent()) {
+
+            Employee existingEmployee = emp.get();
+
+            existingEmployee.setName(employee.getName());
+            existingEmployee.setSalary(employee.getSalary());
+
+            return repo.save(existingEmployee);
+        }
+
+        return null;
+    }
+
+   
+    @DeleteMapping("/delete/{id}")
+    public String deleteEmployee(@PathVariable long id) {
+
+        repo.deleteById(id);
+
+        return "Employee Deleted Successfully";
+    }
 }
