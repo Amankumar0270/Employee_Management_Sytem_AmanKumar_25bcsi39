@@ -8,10 +8,8 @@ public class EmployeeManagementApplication {
 
     public static void main(String[] args) {
 
-        // TODO:
-        // Start Spring Boot application using SpringApplication.run()
+   	 SpringApplication.run(EmployeeManagementApplication.class, args);
+   	 System.out.println("Springboot Successfully implimented!");    
 
-        // Hint:
-        // Pass this class name + args
     }
 }
