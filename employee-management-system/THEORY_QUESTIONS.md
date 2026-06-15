@@ -33,10 +33,10 @@ Write answers for:
    Answer--> JPA uses reflection to create objects when reading data from the database.Without a default constructor, Hibernate cannot create an object of the entity class and may throw an exception such as: "No default constructor for entity" Therefore, every JPA entity should have a no-argument constructor.
    
 3. Fix all getter and setter methods
-   Answer->>---ANS--- All the getter methods will use a return type required of specific parameters with no needed parameter inside the parenthesis, whereas in setter methods the return type will be void whereas the parenthesis will have paramters inside of it for example as such: public Long getId() { return id; } public void setId(Long id) { this.id = id; }
+   Answer->>  All the getter methods will use a return type required of specific parameters with no needed parameter inside the parenthesis, whereas in setter methods the return type will be void whereas the parenthesis will have paramters inside of it for example as such: public Long getId() { return id; } public void setId(Long id) { this.id = id; }
     
 4. What happens if @Id is missing?
-Answer->>---ANS--- JPA cannot identify the primary key of the entity. At application startup, Hibernate will throw an error similar to: Entity 'Employee' has no identifier OR No identifier specified for entity Because every JPA entity must have exactly one primary key field marked with @Id.
+Answer->>  JPA cannot identify the primary key of the entity. At application startup, Hibernate will throw an error similar to: Entity 'Employee' has no identifier OR No identifier specified for entity Because every JPA entity must have exactly one primary key field marked with @Id.
 
 ---
 
